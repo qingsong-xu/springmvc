@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/tool"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tool http://www.springframework.org/schema/tool/spring-tool.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--   默认spring-webmvc-5.2.3.RELEASE.jar包下目录org.springframework.web.servlet下面有一个DispatcherServlet.properties,
+        这个属性文件里配置了默认会加载的映射器和适配器，所以发现当我们不配置BeanNameUrlHandlerMapping映射器时，直接配置了自定义的Controller时功能是正常的。-->
+    <!--    配置handler,若同BeanNameUrlHandlerMapping同时使用，则可以不用加id，与SimpleUrlHandlerMapping配合使用，则通过id进行关联-->
+    <!--    <bean id="itemController1" name="/queryItems.action" class="com.itcast.xqs.controller.ItemController1"/>-->
+    <!--    处理器映射器 将bean的name作为url进行查找，需要在配置Handler时指定bean name （就是url）-->
+    <!--    <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>-->
+
+    <!--    <bean id="itemController2" class="com.itcast.xqs.controller.ItemController2"/>-->
+    <!--    非注解的映射器，多个映射器可以共存 -->
+    <!--    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">-->
+    <!--        <property name="mappings">-->
+    <!--            <props>-->
+    <!--                &lt;!&ndash;  对itemController1进行url映射，可以配置多个url指向同一个controller&ndash;&gt;-->
+    <!--                <prop key="/queryItems1.action">itemController1</prop>-->
+    <!--                <prop key="/queryItems2.action">itemController1</prop>-->
+    <!--                <prop key="/queryItems3.action">itemController2</prop>-->
+    <!--            </props>-->
+    <!--        </property>-->
+    <!--    </bean>-->
+
+    <!--    非注解的处理器适配器，所有处理器适配器都实现HandlerAdapter接口-->
+    <!--    <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>-->
+
+    <!--    非注解处理器适配器-->
+    <!--    <bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter"/>-->
+
+    <!--    以上配置的是非注解的适配器和映射器-->
+    <!--   下面配置注解的适配器和映射器-->
+    <!--    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>-->
+    <!--    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>-->
+    <!--    使用mvc:annotation-driver代替上面注解映射器和适配器，mvc:annotation-driver注解驱动还默认加载了很多的参数方法，实际开发中用这个注解驱动进行配置 -->
+    <!--    <mvc:annotation-driver>-->
+
+    <!--    </mvc:annotation-driver>-->
+    <!--    以上配置注解的适配器和映射器结束-->
+
+    <!-- 对于注解的Handler可以单个配置，实际开发中基本使用组件扫描   -->
+    <!--    <bean class="com.itcast.xqs.controller.ItemController3"/>-->
+    <!--    使用组件扫描，可以扫描controller、service、.....，这里让扫描controller,指定controller的包-->
+    <context:component-scan base-package="com.itcast.xqs.controller">
+    </context:component-scan>
+
+
+    <!--    视图解析器:因为我们采用的是jsp，所以配置对应的jsp视图解析器，默认使用jstl标签，classpath下要有jstl的包 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--        前缀-->
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <!--        后缀-->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+</beans>
