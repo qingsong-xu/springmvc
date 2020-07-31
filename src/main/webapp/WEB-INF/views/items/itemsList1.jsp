@@ -11,11 +11,6 @@
 <html>
 <head>
     <title>商品列表</title>
-    <script>
-        <c:forEach begin="1" var="a" end="5" step="1">
-        ${a} <br>
-        </c:forEach>
-    </script>
 </head>
 <body>
 <div>
@@ -33,10 +28,10 @@
     <c:forEach items="${itemList}" var="item">
         <tr>
             <td>${item.name}</td>
-<%--            <td>${item.price}</td>--%>
-<%--            <td><fmt:formatDate value="${item.createTime}" pattarn="yyyy-MM-dd HH:mm:ss"/></td>--%>
-<%--            <td>${item.description}</td>--%>
-<%--            <td><a href="${pageContext.request.contextPath}/item/editItem.action?id=${item.id}">修改</a></td>--%>
+            <td>${item.price}</td>
+            <td><fmt:formatDate value="${item.createTime}" pattarn="yyyy-MM-dd HH:mm:ss"/></td>
+            <td>${item.description}</td>
+            <td><a href="${pageContext.request.contextPath}/item/editItem.action?id=${item.id}">修改</a></td>
         </tr>
     </c:forEach>
 </table>

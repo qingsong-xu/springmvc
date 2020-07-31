@@ -1,6 +1,7 @@
 package com.itcast.xqs.controller;
 
 import com.itcast.xqs.po.Item;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,9 +16,12 @@ import java.util.List;
 @Controller
 public class ItemController3 {
 
+    private static Logger log = Logger.getLogger(ItemController3.class.getClass());
+
     /**
      * 通过RequestMapping配置url映射，这样可以配置多个方法对应不同的映射，而不用在配置文件中配置，简化了很多，
      * 同时在配置文件中配置组件时，为了方便直接使用组件扫描器扫描，不同一个一个bean的去进行配置
+     *
      * @return
      * @throws Exception
      */
@@ -47,8 +51,11 @@ public class ItemController3 {
         modelAndView.addObject("itemList", list);
         //指定视图
         modelAndView.setViewName("/items/itemsList1");
+
+
+        log.debug("debug");
+        log.error("error");
         //指定视图
         return modelAndView;
     }
-
 }
